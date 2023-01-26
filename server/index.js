@@ -21,8 +21,8 @@ mongoose.connect(mongoDBAccess,
 
 // Creating a new 'to do' item; is the following like extending a class?
 const newTodo = {
-  name: 'eat dinner',
-  data: '1/26',
+  name: 'clean apartment',
+  date: '1/28',
   isCompleted: false
 }
 let sendingTodo = new Todo(newTodo)
