@@ -1,3 +1,15 @@
+const express = require('express');
+const app = express();
+
+const mongoose = require('mongoose');
+
 const mongoDBAccess = 'mongodb+srv://adminuser:adminuser@todolist-mern-project.avm94zg.mongodb.net/?retryWrites=true&w=majority'
 
-console.log(mongoDBAccess)
+mongoose.connect(mongoDBAccess,
+  { useNewUrlParser: true })
+  .then(() => {
+    console.log('your app is connected to MongoDB')
+  }).catch(() => {
+    console.log(err)
+  })
+
