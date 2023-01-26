@@ -13,3 +13,10 @@ mongoose.connect(mongoDBAccess,
     console.log(err)
   })
 
+// a model/module tells us how we want our data to look
+
+// a port is a URL that gives outsiders access to our server
+const port = 8000
+app.listen(port, () => {
+  console.log(`we are in port ${port}`)
+})
