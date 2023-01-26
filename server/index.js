@@ -9,7 +9,7 @@ mongoose.connect(mongoDBAccess,
   { useNewUrlParser: true })
   .then(() => {
     console.log('your app is connected to MongoDB')
-  }).catch(() => {
+  }).catch((err) => {
     console.log(err)
   })
 
