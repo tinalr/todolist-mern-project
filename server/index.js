@@ -60,6 +60,20 @@ mongoose.connect(mongoDBAccess,
 //   }
 // )
 
+// create first endpoint/API
+//'app' means express
+//client wants info from server = request
+//give info to frontend from backend = response
+app.get('/todo', (request, response) => {
+  Todo.find((err, todo) => {
+    if (err) {
+      response.send(err) //send the err to the client
+    }
+    response.send(todo) //send the todos to the client
+    //go to post man, do a get request from the port with '/todo' - will give the response
+  })
+})
+
 
 // a port is a URL that gives outsiders access to our server
 const port = 8000
