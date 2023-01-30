@@ -49,6 +49,17 @@ mongoose.connect(mongoDBAccess,
 //     console.log(todo)
 //   })
 
+// //Delte a todo from the DB
+// Todo.findOneAndDelete(
+//   { _id: '63d304a786ff72f02ad55a80' },
+//   (err, todos) => {
+//     if (err) {
+//       console.log(err)
+//     }
+//     console.log(todos)
+//   }
+// )
+
 
 // a port is a URL that gives outsiders access to our server
 const port = 8000
