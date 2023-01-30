@@ -19,16 +19,24 @@ mongoose.connect(mongoDBAccess,
     console.log(err)
   })
 
-// Creating a new 'to do' item; is the following like extending a class?
-const newTodo = {
-  name: 'clean apartment',
-  date: '1/28',
-  isCompleted: false
-}
-let sendingTodo = new Todo(newTodo)
+// // Creating a new 'to do' item; is the following like extending a class?
+// const newTodo = {
+//   name: 'clean apartment',
+//   date: '1/28',
+//   isCompleted: false
+// }
+// let sendingTodo = new Todo(newTodo)
 
-// how to 'create' (push to the database)
-sendingTodo.save()
+// // how to 'create' (push to the database)
+// sendingTodo.save()
+
+// Read a todo from the DB
+Todo.find((err, todos) => {
+  if(err) {
+    console.log(err)
+  }
+  console.log(todos)
+})
 
 
 // a port is a URL that gives outsiders access to our server
