@@ -8,6 +8,10 @@ const todoSchema = require('./model/Todo')
 //this is the model:
 const Todo = mongoose.model('To Dos', todoSchema)
 
+//has to do with post request through postman
+const bodyParser = require('body-parser')
+app.use(bodyParser.urlencoded({extended:false}))
+
 //This is how we connect to the database and port:
 const mongoDBAccess = 'mongodb+srv://adminuser:adminuser@todolist-mern-project.avm94zg.mongodb.net/?retryWrites=true&w=majority'
 
@@ -71,6 +75,20 @@ app.get('/todo', (request, response) => {
     }
     response.send(todo) //send the todos to the client
     //go to post man, do a get request from the port with '/todo' - will give the response
+  })
+})
+
+app.post('/createTodo', (req, res) => { // the '/createTodo' is what goes at the end of the localhost:port url when I make the post request in postman
+  const newTodo = new Todo({
+    name: req.body.name,
+    date: req.body.data,
+    isCompleted: req.body.isCompleted
+  })
+
+  newTodo.save().then((todo) => {
+    res.send('todo created')
+  }).catch((err) => {
+    res.send(err)
   })
 })
 
