@@ -30,13 +30,24 @@ mongoose.connect(mongoDBAccess,
 // // how to 'create' (push to the database)
 // sendingTodo.save()
 
-// Read a todo from the DB
-Todo.find((err, todos) => {
-  if(err) {
-    console.log(err)
-  }
-  console.log(todos)
-})
+// // Read a todo from the DB
+// Todo.find((err, todos) => {
+//   if(err) {
+//     console.log(err)
+//   }
+//   console.log(todos)
+// })
+
+// // Update a todo from the DB
+// Todo.findOneAndUpdate(
+//   { name: 'clean apartment' }, //what we are looking for
+//   { date: '01/30/2023' }, //what we want to update
+//   (err, todo) => { //function to run
+//     if (err) {
+//       console.log(err)
+//     }
+//     console.log(todo)
+//   })
 
 
 // a port is a URL that gives outsiders access to our server
