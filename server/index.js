@@ -77,7 +77,7 @@ mongoose.connect(mongoDBAccess,
 //A client cannot req data for which we did not create an api endpoint created
 
 //Get all Todos:
-app.get('/todo', (request, response) => {
+app.get('/todos', (request, response) => {
   Todo.find((err, todo) => {
     if (err) {
       response.send(err) //send the err to the client
@@ -87,6 +87,14 @@ app.get('/todo', (request, response) => {
   })
 })
 //Get Todo by ID:
+app.get('/todo/:id', (req, res) => {
+  Todo.findById(req.params.id, (err, todo) => {
+    if (err) {
+      res.send(err)
+    }
+    res.send(todo)
+  })
+})
 
 //Post a new Todo
 app.post('/todo', (req, res) => { // the '/createTodo' is what goes at the end of the localhost:port url when I make the post request in postman
