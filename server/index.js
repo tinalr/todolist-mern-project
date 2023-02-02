@@ -15,6 +15,7 @@ app.use(bodyParser.urlencoded({extended:false}))
 //This is how we connect to the database and port:
 const mongoDBAccess = 'mongodb+srv://adminuser:adminuser@todolist-mern-project.avm94zg.mongodb.net/?retryWrites=true&w=majority'
 
+mongoose.set('strictQuery', false);
 mongoose.connect(mongoDBAccess,
   { useNewUrlParser: true })
   .then(() => {
@@ -22,6 +23,8 @@ mongoose.connect(mongoDBAccess,
   }).catch((err) => {
     console.log(err)
   })
+
+// ****************CRUD operations:*****************
 
 // // Creating a new 'to do' item; is the following like extending a class?
 // const newTodo = {
@@ -64,10 +67,16 @@ mongoose.connect(mongoDBAccess,
 //   }
 // )
 
-// create first endpoint/API
-//'app' means express
-//client wants info from server = request
-//give info to frontend from backend = response
+
+//***********APIs***********************
+
+// create first endpoint/API; remember, apis are in the server and make requests of the db. The client will send reqs to the api, and the api req from db, then res to api/server, then api res to client!!!
+  //'app' means express
+  //client wants info from server = request
+  //give info to frontend from backend = response
+  //A client cannot req data for which we did not create an api endpoint created
+
+//Get all Todos:
 app.get('/todo', (request, response) => {
   Todo.find((err, todo) => {
     if (err) {
@@ -77,8 +86,10 @@ app.get('/todo', (request, response) => {
     //go to post man, do a get request from the port with '/todo' - will give the response
   })
 })
+//Get Todo by ID:
 
-app.post('/createTodo', (req, res) => { // the '/createTodo' is what goes at the end of the localhost:port url when I make the post request in postman
+//Post a new Todo
+app.post('/todo', (req, res) => { // the '/createTodo' is what goes at the end of the localhost:port url when I make the post request in postman
   const newTodo = new Todo({
     name: req.body.name,
     date: req.body.data,
@@ -89,6 +100,35 @@ app.post('/createTodo', (req, res) => { // the '/createTodo' is what goes at the
     res.send('todo created')
   }).catch((err) => {
     res.send(err)
+  })
+})
+
+//Update a Todo
+app.patch('/todo/:id', (req, res) => {
+  Todo.findByIdAndUpdate(req.params.id, { isCompleted: true }, (err, todo) => {
+    if (err) {
+      res.send(err)
+    }
+    res.send(todo)
+  })
+})
+
+app.put('/todo/:id', (req, res) => {
+  Todo.findByIdAndUpdate(req.params.id, { isCompleted:req.body.isCompleted,name:req.body.name,date:req.body.date }, (err, todo) => {
+    if (err) {
+      res.send(err)
+    }
+    res.send(todo)
+  })
+})
+
+//Delte a Todo
+app.delete('/todo/:id', (req, res) => {
+  Todo.findByIdAndDelete(req.params.id, (err, todo) => {
+    if (err) {
+      res.send(err)
+    }
+    res.send(todo)
   })
 })
 
