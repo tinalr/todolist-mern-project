@@ -24,7 +24,7 @@ mongoose.connect(mongoDBAccess,
     console.log(err)
   })
 
-// ****************CRUD operations:*****************
+// ****************CRUD operations, these are for example purposes:*****************
 
 // // Creating a new 'to do' item; is the following like extending a class?
 // const newTodo = {
