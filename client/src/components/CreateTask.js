@@ -2,7 +2,12 @@
 
 const CreateTask = () => {
   return (
-    <>Create Task</>
+    <>
+      <div>
+        <input type='text' />
+        <button>add</button>
+      </div>
+    </>
   )
 }
 

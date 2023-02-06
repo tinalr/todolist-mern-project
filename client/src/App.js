@@ -8,7 +8,10 @@ import TaskList from './components/TaskList';
 function App() {
   return (
     <>
-      <Header/>
+      <Header />
+      <TaskDate />
+      <CreateTask />
+      <TaskList/>
     </>
   );
 }

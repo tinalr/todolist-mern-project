@@ -2,7 +2,12 @@
 
 const TaskDate = () => {
   return (
-    <>TaskDate</>
+    <>
+      <h2>
+        <p>Month Date</p>
+        <p>Time</p>
+      </h2>
+    </>
   )
 }
 
