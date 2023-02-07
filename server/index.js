@@ -8,7 +8,7 @@ const mongoose = require('mongoose');
 //file import
 const todoSchema = require('./model/Todo')
 //this is the model:
-const Todo = mongoose.model('To Dos', todoSchema)
+const Todo = mongoose.model('ToDos', todoSchema)
 
 //has to do with post request through postman
 const bodyParser = require('body-parser')
@@ -26,50 +26,6 @@ mongoose.connect(mongoDBAccess,
     console.log(err)
   })
 
-// ****************CRUD operations, these are for example purposes:*****************
-
-// // Creating a new 'to do' item; is the following like extending a class?
-// const newTodo = {
-//   name: 'clean apartment',
-//   date: '1/28',
-//   isCompleted: false
-// }
-// let sendingTodo = new Todo(newTodo)
-
-// // how to 'create' (push to the database)
-// sendingTodo.save()
-
-// // Read a todo from the DB
-// Todo.find((err, todos) => {
-//   if(err) {
-//     console.log(err)
-//   }
-//   console.log(todos)
-// })
-
-// // Update a todo from the DB
-// Todo.findOneAndUpdate(
-//   { name: 'clean apartment' }, //what we are looking for
-//   { date: '01/30/2023' }, //what we want to update
-//   (err, todo) => { //function to run
-//     if (err) {
-//       console.log(err)
-//     }
-//     console.log(todo)
-//   })
-
-// //Delte a todo from the DB
-// Todo.findOneAndDelete(
-//   { _id: '63d304a786ff72f02ad55a80' },
-//   (err, todos) => {
-//     if (err) {
-//       console.log(err)
-//     }
-//     console.log(todos)
-//   }
-// )
-
-
 //***********APIs***********************
 
 // create first endpoint/API; remember, apis are in the server and make requests of the db. The client will send reqs to the api, and the api req from db, then res to api/server, then api res to client!!!
@@ -79,7 +35,7 @@ mongoose.connect(mongoDBAccess,
 //A client cannot req data for which we did not create an api endpoint created
 
 //Get all Todos:
-app.get('/todos', (request, response) => {
+app.get('/todo', (request, response) => {
   Todo.find((err, todo) => {
     if (err) {
       response.send(err) //send the err to the client
@@ -102,7 +58,7 @@ app.get('/todo/:id', (req, res) => {
 app.post('/todo', (req, res) => { // the '/createTodo' is what goes at the end of the localhost:port url when I make the post request in postman
   const newTodo = new Todo({
     name: req.body.name,
-    date: req.body.data,
+    date: req.body.date,
     isCompleted: req.body.isCompleted
   })
 
@@ -151,3 +107,47 @@ app.listen(port, () => {
 
 
 //We installed nodemon globally so that anytime we make an edit, it automatically reruns 'node index.js' in the terminal
+
+// ****************CRUD operations, these are for example purposes:*****************
+
+// // Creating a new 'to do' item; is the following like extending a class?
+// const newTodo = {
+//   name: 'clean apartment',
+//   date: '1/28',
+//   isCompleted: false
+// }
+// let sendingTodo = new Todo(newTodo)
+
+// // how to 'create' (push to the database)
+// sendingTodo.save()
+
+// // Read a todo from the DB
+// Todo.find((err, todos) => {
+//   if(err) {
+//     console.log(err)
+//   }
+//   console.log(todos)
+// })
+
+// // Update a todo from the DB
+// Todo.findOneAndUpdate(
+//   { name: 'clean apartment' }, //what we are looking for
+//   { date: '01/30/2023' }, //what we want to update
+//   (err, todo) => { //function to run
+//     if (err) {
+//       console.log(err)
+//     }
+//     console.log(todo)
+//   })
+
+// //Delte a todo from the DB
+// Todo.findOneAndDelete(
+//   { _id: '63d304a786ff72f02ad55a80' },
+//   (err, todos) => {
+//     if (err) {
+//       console.log(err)
+//     }
+//     console.log(todos)
+//   }
+// )
+
