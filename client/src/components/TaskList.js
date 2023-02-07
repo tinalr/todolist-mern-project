@@ -1,15 +1,17 @@
 // import
 
-const TaskList = () => {
+const TaskList = ({ todoName, date, isCompleted }) => {
   return (
     <>
       <div>
-        <h3>Task Name</h3>
-        <h4>Due Date</h4>
+        <h3>{todoName ? todoName : 'no name'}</h3>
+        <h4>{date ? date : 'no date'}</h4>
       </div>
       <div>
-        <input name='select' type='radio' />
-        <button>delete</button>
+        {isCompleted ? <input name='isCompleted' type='radio' style={{ color: 'green' }} />
+          : <input name='isCompleted' type='radio' style={{ color: 'blue' }} />}
+
+        <button style={{ backgroundColor: 'red' }}>delete</button>
       </div>
     </>
   )

@@ -1,18 +1,21 @@
 //Deploying app with Cyclic
 
 //packages
-const express = require('express');
-const app = express();
-const mongoose = require('mongoose');
+const express = require('express')
+const app = express()
+const mongoose = require('mongoose')
+
+//has to do with post request through postman
+const bodyParser = require('body-parser')
+app.use(bodyParser.urlencoded({ extended: false }))
+
 
 //file import
 const todoSchema = require('./model/Todo')
 //this is the model:
 const Todo = mongoose.model('ToDos', todoSchema)
 
-//has to do with post request through postman
-const bodyParser = require('body-parser')
-app.use(bodyParser.urlencoded({ extended: false }))
+
 
 //This is how we connect to the database and port:
 const mongoDBAccess = 'mongodb+srv://adminuser:adminuser@todolist-mern-project.avm94zg.mongodb.net/?retryWrites=true&w=majority'
@@ -35,12 +38,12 @@ mongoose.connect(mongoDBAccess,
 //A client cannot req data for which we did not create an api endpoint created
 
 //Get all Todos:
-app.get('/todo', (request, response) => {
+app.get('/todo', (req, res) => {
   Todo.find((err, todo) => {
     if (err) {
-      response.send(err) //send the err to the client
+      res.send(err) //send the err to the client
     }
-    response.send(todo) //send the todos to the client
+    res.send(todo) //send the todos to the client
     //go to post man, do a get request from the port with '/todo' - will give the response
   })
 })
@@ -94,7 +97,7 @@ app.delete('/todo/:id', (req, res) => {
     if (err) {
       res.send(err)
     }
-    res.send(todo)
+    res.send({message:"success", data:todo})
   })
 })
 
