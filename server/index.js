@@ -5,10 +5,15 @@ const express = require('express')
 const app = express()
 const mongoose = require('mongoose')
 
+const cors = require('cors')
+app.use(cors({
+  origin: '*'
+}))
+
 //has to do with post request through postman
 const bodyParser = require('body-parser')
 app.use(bodyParser.urlencoded({ extended: false }))
-
+app.use(express.json())
 
 //file import
 const todoSchema = require('./model/Todo')
@@ -59,6 +64,7 @@ app.get('/todo/:id', (req, res) => {
 
 //Post a new Todo
 app.post('/todo', (req, res) => { // the '/createTodo' is what goes at the end of the localhost:port url when I make the post request in postman
+  console.log(res)
   const newTodo = new Todo({
     name: req.body.name,
     date: req.body.date,
@@ -97,7 +103,7 @@ app.delete('/todo/:id', (req, res) => {
     if (err) {
       res.send(err)
     }
-    res.send({message:"success", data:todo})
+    res.send({ message: "success", data: todo })
   })
 })
 

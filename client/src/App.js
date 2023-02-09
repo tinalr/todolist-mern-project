@@ -8,35 +8,41 @@ import TaskList from './components/TaskList';
 import axios from 'axios';
 
 //Server issue: 503, service unavailable
-const API_ENDPOINT = 'https://modern-pocketbook-bee.cyclic.app/'
+const API_ENDPOINT = 'http://localhost:8000'
 
 function App() {
 
   const [task, setTask] = useState([])
 
   const getTask = async () => {
-    let data = await axios.get(`${API_ENDPOINT}todo`)
-    console.log(data.data)
-    setTask(data.data)
+    try {
+      let data = await axios.get(`${API_ENDPOINT}/todo`)
+      console.log(data)
+      setTask(data.data)
+    } catch (err) {
+      console.log(err)
+    }
   }
-  useEffect(() => {
-    getTask()
-  }, [])
+  
 
-  console.log(task)
+useEffect(() => {
+  getTask()
+}, [])
 
-  return (
-    <>
-      <Header />
-      <TaskDate />
-      <CreateTask />
-      <TaskList/>
-      <div>
-        {task.map((item) => <TaskList todoName={item.name} date={item.date} isCompleted={item.isCompleted} />)}
-      </div>
+console.log(task)
 
-    </>
-  );
+return (
+  <>
+    <Header />
+    <TaskDate />
+    <CreateTask API_ENDPOINT={API_ENDPOINT} getTask={getTask} />
+
+    <div>
+      {task.map((item) => <TaskList API_ENDPOINT={API_ENDPOINT} todoName={item.name} date={item.date} isCompleted={item.isCompleted} id={item._id} getTask={getTask} />)}
+    </div>
+
+  </>
+);
 }
 
 export default App;

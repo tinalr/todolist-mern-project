@@ -1,6 +1,17 @@
-// import
+import axios from "axios"
 
-const TaskList = ({ todoName, date, isCompleted }) => {
+const TaskList = ({ API_ENDPOINT, todoName, date, isCompleted, id, getTask }) => {
+  const updateTask = async (task) => {
+    let data = await axios.put(`${API_ENDPOINT}/todo/${id}`, task)
+    getTask()
+    console.log(data)
+  }
+
+  const deleteTask = async () => {
+    let data = await axios.delete(`${API_ENDPOINT}/todo/${id}`)
+    getTask()
+  }
+
   return (
     <div id='task_list_div'>
       <div>
@@ -8,10 +19,14 @@ const TaskList = ({ todoName, date, isCompleted }) => {
         <h4>{date ? date : 'no date'}</h4>
       </div>
       <div id='btn_div'>
-        {isCompleted ? <input name='isCompleted' type='radio' style={{ color: 'green' }} />
-          : <input name='isCompleted' type='radio' style={{ color: 'blue' }} />}
 
-        <button style={{ backgroundColor: 'red' }}>delete</button>
+        <button onClick={() => updateTask({ isCompleted: !isCompleted })}
+          name='isCompleted' type='radio'
+          style={isCompleted ? { backgroundColor: 'green' } : { backgroundColor: "blue" }}>
+          Done?
+        </button>
+
+        <button onClick={deleteTask} style={{ backgroundColor: 'red' }}>delete</button>
       </div>
     </div>
   )
