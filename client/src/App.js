@@ -23,26 +23,28 @@ function App() {
       console.log(err)
     }
   }
-  
 
-useEffect(() => {
-  getTask()
-}, [])
 
-console.log(task)
+  useEffect(() => {
+    getTask()
+  }, [])
 
-return (
-  <>
-    <Header />
-    <TaskDate />
-    <CreateTask API_ENDPOINT={API_ENDPOINT} getTask={getTask} />
+  console.log(task)
 
-    <div>
-      {task.map((item) => <TaskList API_ENDPOINT={API_ENDPOINT} todoName={item.name} date={item.date} isCompleted={item.isCompleted} id={item._id} getTask={getTask} />)}
-    </div>
+  return (
+    <>
+      <Header />
+      <TaskDate />
+      <CreateTask API_ENDPOINT={API_ENDPOINT} getTask={getTask} />
 
-  </>
-);
+      <div>
+        {task.length === 0 ? 'Loading...' :
+          task.map((item) => <TaskList API_ENDPOINT={API_ENDPOINT} todoName={item.name} date={item.date} isCompleted={item.isCompleted} id={item._id} getTask={getTask} />) 
+        }
+      </div>
+
+    </>
+  );
 }
 
 export default App;
