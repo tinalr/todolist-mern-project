@@ -7,6 +7,7 @@ import TaskList from './components/TaskList';
 
 import axios from 'axios';
 
+//Server issue: 503, service unavailable
 const API_ENDPOINT = 'https://modern-pocketbook-bee.cyclic.app/'
 
 function App() {

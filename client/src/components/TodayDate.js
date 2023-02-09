@@ -8,7 +8,7 @@ const TodayDate = () => {
   let time = today.toLocaleTimeString().split(' ')
   return (
     <>
-      <h2>
+      <h2 id='task_div'>
         <p>{date}</p>
         <p>{time}</p>
       </h2>
