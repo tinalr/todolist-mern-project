@@ -7,7 +7,7 @@ import TaskList from './components/TaskList';
 
 import axios from 'axios';
 
-const API_ENDPOINT = 'http://localhost:8000/'
+const API_ENDPOINT = 'https://modern-pocketbook-bee.cyclic.app/'
 
 function App() {
 
